@@ -31,7 +31,7 @@ services:
         volumes:
             - uploads:/Kiwi/uploads:Z
         environment:
-            KIWI_DB_HOST: db
+            KIWI_DB_HOST: kiwi_db
             KIWI_DB_PORT: 3306
             KIWI_DB_NAME: ihealth_kiwi_tcms
             KIWI_DB_USER: ihealth
