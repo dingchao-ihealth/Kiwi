@@ -1,7 +1,7 @@
-version: '2'
+version: '3'
 
 services:
-    db:
+    kiwi_db:
         container_name: kiwi_db
         image: centos/mariadb-103-centos7
         volumes:
@@ -12,17 +12,17 @@ services:
             - ./99-charset.cnf:/usr/share/container-scripts/mysql/cnf/99-charset.cnf:Z
         restart: always
         environment:
-            MYSQL_ROOT_PASSWORD: kiwi-1s-aw3s0m3
-            MYSQL_DATABASE: kiwi
-            MYSQL_USER: kiwi
-            MYSQL_PASSWORD: kiwi
+            MYSQL_ROOT_PASSWORD: ihealth-kiwi-aw3s0m
+            MYSQL_DATABASE: ihealth_kiwi_tcms
+            MYSQL_USER: ihealth
+            MYSQL_PASSWORD: kiwi@ihealth
             MYSQL_CHARSET: utf8mb4
             MYSQL_COLLATION: utf8mb4_unicode_ci
 
-    web:
+    kiwi_web:
         container_name: kiwi_web
         depends_on:
-            - db
+            - kiwi_db
         restart: always
         image: kiwitcms/kiwi:latest
         ports:
@@ -33,9 +33,10 @@ services:
         environment:
             KIWI_DB_HOST: db
             KIWI_DB_PORT: 3306
-            KIWI_DB_NAME: kiwi
-            KIWI_DB_USER: kiwi
-            KIWI_DB_PASSWORD: kiwi
+            KIWI_DB_NAME: ihealth_kiwi_tcms
+            KIWI_DB_USER: ihealth
+            KIWI_DB_PASSWORD: kiwi@ihealth
+            KIWI_DONT_ENFORCE_HTTPS: "true"
 
 volumes:
     db_data:
